@@ -16,9 +16,21 @@ public:
 // LIFO = Last in, first out
 class LifoList {
 	Node* root;
+	bool isLastNode(Node*);
 public:
 	LifoList() : root(nullptr) {}
 	LifoList& addNode(int);
 	void print();
-	bool isLastNode(Node*);
+};
+
+// klasszikus Linked List
+class LinkedList {
+	Node* root;
+	Node* getLastNode();
+public:
+	LinkedList() : root(nullptr) {}
+	LinkedList(const LinkedList&);
+	LinkedList& addNode(int);
+	void deleteItem(int n); // deletes nth element if it exists!
+	void print();
 };
