@@ -62,6 +62,18 @@ LinkedList::LinkedList(const LinkedList& llToCopy) {
 	}
 }
 
+LinkedList::~LinkedList() {
+	std::cout << "Destructor has been called" << std::endl;
+	Node* current = root;
+	if (current != nullptr) {
+		while (current != nullptr) {
+			Node* next = current->getNext();
+			delete current;
+			current = next;
+		}
+	}
+}
+
 void LinkedList::deleteItem(int n) {
 	if (root != nullptr) {
 		if (n == 1) {
@@ -96,7 +108,6 @@ void LinkedList::deleteItem(int n) {
 					}
 				}
 			}
-			// HAZIFELADAT!
 		}
 	}
 }

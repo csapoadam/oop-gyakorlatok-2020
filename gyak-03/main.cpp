@@ -5,9 +5,9 @@
 #include "LinkedList.h"
 
 void f() {
-    LifoList myLifoList;
-    myLifoList.addNode(5).addNode(10).addNode(12);
-    myLifoList.print();
+    LinkedList myLinkedList; // meg jo h kiirattuk es ellenoriztuk h lefut-e a destruktor...
+    myLinkedList.addNode(5).addNode(10).addNode(12);
+    myLinkedList.print();
 }
 
 int main()
