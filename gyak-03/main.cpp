@@ -1,4 +1,5 @@
 //
+//
 
 #include <iostream>
 #include "LinkedList.h"
@@ -38,7 +39,11 @@ int main()
     myLinkedList2.deleteItem(1);
     myLinkedList2.print();
 
-    std::cout << "Toroljuk az uj myLinkedList2 masodik elemet" << std::endl;
-    myLinkedList2.deleteItem(2);
+    std::cout << "Toroljuk az uj myLinkedList2 4. elemet" << std::endl;
+    myLinkedList2.deleteItem(4);
+    myLinkedList2.print();
+
+    std::cout << "Toroljuk az uj myLinkedList2 3. elemet" << std::endl;
+    myLinkedList2.deleteItem(3);
     myLinkedList2.print();
 }

@@ -73,7 +73,29 @@ void LinkedList::deleteItem(int n) {
 		else {
 			// a torlendo node elotti node-janak next-je a torlendo
 			// node next-je
+			int cnt = 2;
+			Node* previous = root;
+			Node* current = root->getNext();
 
+			while (true) {
+				if (current == nullptr) {
+					break; // nincs mit torolni, n nagyobb, mint a lista hossza!
+				}
+				else {
+					if (cnt == n) {
+						// torles itt megvalositando!
+						previous->setNext(current->getNext()); // current biztosan nem nullptr!
+						delete current;
+						break;
+					}
+					else {
+						// leptetes tovabb
+						cnt++;
+						previous = current;
+						current = previous->getNext();
+					}
+				}
+			}
 			// HAZIFELADAT!
 		}
 	}
