@@ -4,6 +4,18 @@
 Node::Node(int val) : next{ nullptr }, value(val) {
 }
 
+LifoList::~LifoList() {
+	std::cout << "Destructor has been called" << std::endl;
+	Node* current = root;
+	if (current != nullptr) {
+		while (current != nullptr) {
+			Node* next = current->getNext();
+			delete current;
+			current = next;
+		}
+	}
+}
+
 LifoList& LifoList::addNode(int value) {
 	// amikor ezt eloszor meghivjuk, root meg nullptr
 	if (root == nullptr) {// tehat az uj node amit letrehozunk, az lesz maga a root

@@ -19,6 +19,7 @@ class LifoList {
 	bool isLastNode(Node*);
 public:
 	LifoList() : root(nullptr) {}
+	~LifoList();
 	LifoList& addNode(int);
 	void print();
 };
