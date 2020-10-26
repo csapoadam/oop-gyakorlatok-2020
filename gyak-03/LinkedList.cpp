@@ -74,6 +74,31 @@ LinkedList::LinkedList(const LinkedList& llToCopy) {
 	}
 }
 
+LinkedList& LinkedList::operator=(const LinkedList& llToCopy) {
+	// ide bemasolhatnam a destruktor metodus kodjat
+	// 1-az-1ben... de ennel szebb, ha letrehozok egy 3.
+	// lancolt listat a stack-en, annak a rootjat beallitom
+	// a mostani lancolt lista rootjanak cimere
+	// -> amikor a fv. kilep, ez automatikusan felszabadul
+	// (shallowCopyOfOldLinkedList-re meghivodik a destruktor!)
+	LinkedList shallowCopyOfOldLinkedList; // copy
+	shallowCopyOfOldLinkedList.root = root;
+	// ////////////
+
+	root = nullptr; // fontos! mert a 92. sorban addNode() ettol fuggoen mast csinal
+
+	if (llToCopy.root != nullptr) {
+		Node* current = llToCopy.root;
+		addNode(current->getValue());
+		while (current->getNext() != nullptr) {
+			current = current->getNext();
+			addNode(current->getValue());
+		}
+	}
+
+	return *this;
+}
+
 LinkedList::~LinkedList() {
 	std::cout << "Destructor has been called" << std::endl;
 	Node* current = root;

@@ -9,9 +9,15 @@ void f() {
     myLinkedList.addNode(5).addNode(10).addNode(12);
     myLinkedList.print();
 
-    LifoList myLifoList; // meg jo h kiirattuk es ellenoriztuk h lefut-e a destruktor...
-    myLifoList.addNode(5).addNode(10).addNode(12);
-    myLifoList.print();
+    LinkedList myLinkedList2;
+    myLinkedList2.addNode(15).addNode(16);
+    myLinkedList2.print();
+
+    myLinkedList2 = myLinkedList;
+    myLinkedList2.addNode(17);
+    std::cout << "A ket lancolt lista:" << std::endl;
+    myLinkedList.print();
+    myLinkedList2.print();
 }
 
 int main()

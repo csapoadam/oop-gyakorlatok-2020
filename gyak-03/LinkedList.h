@@ -31,6 +31,7 @@ class LinkedList {
 public:
 	LinkedList() : root(nullptr) {}
 	LinkedList(const LinkedList&);
+	LinkedList& operator=(const LinkedList&);
 	~LinkedList();
 	LinkedList& addNode(int);
 	void deleteItem(int n); // deletes nth element if it exists!
