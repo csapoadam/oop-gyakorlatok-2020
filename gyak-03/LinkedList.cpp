@@ -4,6 +4,43 @@
 Node::Node(int val) : next{ nullptr }, value(val) {
 }
 
+LifoList::LifoList(const LifoList& llToCopy) {
+	// nem lehet 100%-ban u.az a copy constructor, mint
+	// a LinkedList eseteben, mert addNode itt a lista
+	// elejere pakolja a kiolvasott elemeket
+	// -> forditott sorrendet kapnank
+	if (llToCopy.root == nullptr) {
+		root = nullptr; // ha a masolando root nullptr, tovabbra sincs mit masolni
+	}
+	else {
+		// ellenkezo esetben eloszor a root-ot masoljuk
+		Node* currentInLlToCopy = llToCopy.root;
+		// (addNode() letrehozza ebben az objektumban a rootot)
+		addNode(currentInLlToCopy->getValue());
+		Node* current = root; // root itt mar letezik!
+
+		// amig van tovabbi elem, mindegyikhez keszitunk egy masolatot
+		while (currentInLlToCopy->getNext() != nullptr) {
+			currentInLlToCopy = currentInLlToCopy->getNext();
+			// addNode() helyett setNext-et hasznalunk
+			current->setNext(
+				new Node(
+					currentInLlToCopy->getValue()
+				)
+			);
+			current = current->getNext();
+		}
+	}
+}
+
+LifoList& LifoList::operator=(const LifoList& llToCopy) {
+	LifoList deepCopyOfLlToCopy(llToCopy);
+	Node* oldroot = this->root;
+	this->root = deepCopyOfLlToCopy.root;
+	deepCopyOfLlToCopy.root = oldroot;
+	return *this;
+}
+
 LifoList::~LifoList() {
 	std::cout << "Destructor has been called" << std::endl;
 	Node* current = root;
