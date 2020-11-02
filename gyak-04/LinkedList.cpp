@@ -46,53 +46,11 @@ DynamicList::DynamicList(const DynamicList& llToCopy) {
 	}
 }
 
-// akkor hivodik meg, ha azt irjuk, hogy:
-// myLifoList5 = myLifoList; // vagy
-// myFifoList7 = myFifoList3;
-// mindket esetben myLifoList5 es myFifoList7 mar leteznek!
-// tehat nem eleg a rootnak uj cimet adni, a regit mem.teruletet fel is kell
-// szabaditani!
-DynamicList& DynamicList::operator=(const DynamicList& llToCopy) {
-	// copy-and-swap itt mar nem jo!!
-	// mert nem tudjuk, hogy llToCopy FifoList vagy LifoList?
-	// tehat: copy lepesnel milyen tipust hozunk letre? DynamicListet? Annak a tipusnak a destruktora is fog meghivodni.
-	// jelenleg ez mindegy lenne, de mihelyt Lifo vagy FifoList-nek lenne sajat destruktora...
-	std::cout << "Copy assignment for DynamicList called" << std::endl;
-	/*
-	DynamicList deepCopyOfLlToCopy(llToCopy); // itt nem tudjuk, hogy deepCopyOfLlToCopy Lifo vagy Fifo list
+LifoList& LifoList::operator=(const LifoList& llToCopy) {
+	LifoList deepCopyOfLlToCopy(llToCopy);
 	Node* oldroot = this->root;
 	this->root = deepCopyOfLlToCopy.root;
 	deepCopyOfLlToCopy.root = oldroot;
-	return *this;
-	*/
-
-	// ehelyett: destruktor kodja + copy construktor kodja:
-	Node* current = root;
-	if (current != nullptr) {
-		while (current != nullptr) {
-			Node* next = current->getNext();
-			delete current;
-			current = next;
-		}
-	}
-	root = nullptr; // mintha most hoztuk volna letre
-	// copy constr kodja:
-	if (llToCopy.root == nullptr) {
-		root = nullptr;
-	}
-	else {
-		root = new Node(llToCopy.root->getValue());
-		Node* current = root; // root itt mar letezik!
-		Node* currentInLlToCopy = llToCopy.root;
-		while (currentInLlToCopy = currentInLlToCopy->getNext()) {
-			current->setNext(
-				new Node(
-					currentInLlToCopy->getValue()
-				)
-			);
-			current = current->getNext();
-		}
-	}
 	return *this;
 }
 
@@ -138,6 +96,14 @@ bool LifoList::isLastNode(Node* node) {
 			currentNode = currentNode->getNext();
 		}
 	}
+}
+
+FifoList& FifoList::operator=(const FifoList& llToCopy) {
+	FifoList deepCopyOfLlToCopy(llToCopy);
+	Node* oldroot = this->root;
+	this->root = deepCopyOfLlToCopy.root;
+	deepCopyOfLlToCopy.root = oldroot;
+	return *this;
 }
 
 void FifoList::deleteItem(int n) {
