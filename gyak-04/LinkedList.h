@@ -18,6 +18,7 @@ protected:
 public:
 	DynamicList() : root{nullptr} {}
 	DynamicList(const DynamicList&);
+	DynamicList& operator=(const DynamicList&);
 	~DynamicList();
 };
 
@@ -37,7 +38,6 @@ public:
 		std::cout << "copy constructor for LifoList called..." << std::endl;
 		// ez csak egy szemlelto pelda, jelenleg nincs szukseg sajat copy constr-ra itt!
 	}
-	LifoList& operator=(const LifoList&);
 	LifoList& addNode(int);
 	void print();
 };
@@ -46,8 +46,9 @@ public:
 class FifoList : public DynamicList {
 	Node* getLastNode();
 public:
-	FifoList& operator=(const FifoList&);
 	FifoList& addNode(int);
+	// itt nincs copy construktor, tehat automatikusan a szuloe hivodik meg!
+	// FifoList mynewFList(myAlreadyExistingFifoList); // azt jelenti, hogy egy DynamicListet is letrehozok vegso soron
 	void deleteItem(int n); // deletes nth element if it exists!
 	void print();
 };
