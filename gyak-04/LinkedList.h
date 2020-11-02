@@ -11,31 +11,35 @@ public:
 	void setNext(Node* n) { next = n; }
 };
 
+class DynamicList {
+protected:
+	Node* root;
+public:
+	DynamicList() : root{nullptr} {}
+	~DynamicList();
+};
+
 // olyan mint egy FifoList, de az uj elemeket mindig az
 // elejere szurjuk be... ezert pl. amikor printelunk, forditott
 // sorrendben olvassuk ki az ertekeket (mint a hozzaadas sorrendje)
 // LIFO = Last in, first out
-class LifoList {
-	Node* root;
+class LifoList : public DynamicList {
 	bool isLastNode(Node*);
 public:
-	LifoList() : root(nullptr) {}
+	LifoList() {}
 	LifoList(const LifoList&);
 	LifoList& operator=(const LifoList&);
-	~LifoList();
 	LifoList& addNode(int);
 	void print();
 };
 
 // klasszikus Linked List
-class FifoList {
-	Node* root;
+class FifoList : public DynamicList {
 	Node* getLastNode();
 public:
-	FifoList() : root(nullptr) {}
+	FifoList() {}
 	FifoList(const FifoList&);
 	FifoList& operator=(const FifoList&);
-	~FifoList();
 	FifoList& addNode(int);
 	void deleteItem(int n); // deletes nth element if it exists!
 	void print();

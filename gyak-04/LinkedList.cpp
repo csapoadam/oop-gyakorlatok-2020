@@ -4,6 +4,18 @@
 Node::Node(int val) : next{ nullptr }, value(val) {
 }
 
+DynamicList::~DynamicList() {
+	std::cout << "Destructor for DynamicList has been called" << std::endl;
+	Node* current = root;
+	if (current != nullptr) {
+		while (current != nullptr) {
+			Node* next = current->getNext();
+			delete current;
+			current = next;
+		}
+	}
+}
+
 LifoList::LifoList(const LifoList& llToCopy) {
 	// nem lehet 100%-ban u.az a copy constructor, mint
 	// a FifoList eseteben, mert addNode itt a lista
@@ -39,18 +51,6 @@ LifoList& LifoList::operator=(const LifoList& llToCopy) {
 	this->root = deepCopyOfLlToCopy.root;
 	deepCopyOfLlToCopy.root = oldroot;
 	return *this;
-}
-
-LifoList::~LifoList() {
-	std::cout << "Destructor has been called" << std::endl;
-	Node* current = root;
-	if (current != nullptr) {
-		while (current != nullptr) {
-			Node* next = current->getNext();
-			delete current;
-			current = next;
-		}
-	}
 }
 
 LifoList& LifoList::addNode(int value) {
@@ -118,18 +118,6 @@ FifoList& FifoList::operator=(const FifoList& llToCopy) {
 	this->root = deepCopyOfLlToCopy.root;
 	deepCopyOfLlToCopy.root = oldroot;
 	return *this;
-}
-
-FifoList::~FifoList() {
-	std::cout << "Destructor has been called" << std::endl;
-	Node* current = root;
-	if (current != nullptr) {
-		while (current != nullptr) {
-			Node* next = current->getNext();
-			delete current;
-			current = next;
-		}
-	}
 }
 
 void FifoList::deleteItem(int n) {

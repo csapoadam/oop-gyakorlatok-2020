@@ -41,7 +41,7 @@ int main()
 {
     char c;
     for (int i = 0; i < 10000; i++) {
-        g();
+        f();
         std::cin >> c;
     }
 }
