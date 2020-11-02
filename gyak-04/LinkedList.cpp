@@ -16,25 +16,26 @@ DynamicList::~DynamicList() {
 	}
 }
 
-LifoList::LifoList(const LifoList& llToCopy) {
-	// nem lehet 100%-ban u.az a copy constructor, mint
-	// a FifoList eseteben, mert addNode itt a lista
-	// elejere pakolja a kiolvasott elemeket
-	// -> forditott sorrendet kapnank
+DynamicList::DynamicList(const DynamicList& llToCopy) {
+	std::cout << "copy constructor for Dynamic List called!" << std::endl;
+	// LifoList es FifoList eseteben nem volt u.az a copy constr.
+	// ... de csak azert, mert egyik esetben az addNode() metodust hasznaltuk.
+	// Ha mindket esetben alapszintubb muveletekkel oldjuk meg,
+	// valojaban a ketto u.az!
 	if (llToCopy.root == nullptr) {
-		root = nullptr; // ha a masolando root nullptr, tovabbra sincs mit masolni
+		root = nullptr; // ha a masolando root nullptr, nincs mit masolni
+		// ettol meg root = nullptr be kell allitani, mert ujonnan hozunk letre egy
+		// ures DynamicListet!
 	}
 	else {
 		// ellenkezo esetben eloszor a root-ot masoljuk
-		Node* currentInLlToCopy = llToCopy.root;
-		// (addNode() letrehozza ebben az objektumban a rootot)
-		addNode(currentInLlToCopy->getValue());
+		root = new Node(llToCopy.root->getValue());
+
 		Node* current = root; // root itt mar letezik!
+		Node* currentInLlToCopy = llToCopy.root;
 
 		// amig van tovabbi elem, mindegyikhez keszitunk egy masolatot
-		while (currentInLlToCopy->getNext() != nullptr) {
-			currentInLlToCopy = currentInLlToCopy->getNext();
-			// addNode() helyett setNext-et hasznalunk
+		while (currentInLlToCopy = currentInLlToCopy->getNext()) {
 			current->setNext(
 				new Node(
 					currentInLlToCopy->getValue()
@@ -44,6 +45,7 @@ LifoList::LifoList(const LifoList& llToCopy) {
 		}
 	}
 }
+
 
 LifoList& LifoList::operator=(const LifoList& llToCopy) {
 	LifoList deepCopyOfLlToCopy(llToCopy);
@@ -98,20 +100,6 @@ bool LifoList::isLastNode(Node* node) {
 }
 
 
-FifoList::FifoList(const FifoList& llToCopy) {
-	if (llToCopy.root == nullptr) {
-		root = nullptr;
-	}
-	else {
-		Node* current = llToCopy.root;
-		addNode(current->getValue());
-		while (current->getNext() != nullptr) {
-			current = current->getNext();
-			addNode(current->getValue());
-		}
-	}
-}
-
 FifoList& FifoList::operator=(const FifoList& llToCopy) {
 	FifoList deepCopyOfLlToCopy(llToCopy);
 	Node* oldroot = this->root;
@@ -162,7 +150,7 @@ void FifoList::deleteItem(int n) {
 void FifoList::print() {
 	Node* currentNode = root;
 	if (currentNode != nullptr) {
-		std::cout << "I am a Linked list w/ values: ";
+		std::cout << "I am a FIFO list w/ values: ";
 		std::cout << currentNode->getValue();
 		while (currentNode->getNext() != nullptr) {
 			currentNode = currentNode->getNext();
