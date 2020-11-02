@@ -22,6 +22,11 @@ public:
 	// vagy a gyermek nem masolhato =-jellel:
 	DynamicList& operator=(const DynamicList&) = delete;
 	~DynamicList();
+	virtual DynamicList& addNode(int) {
+		std::cout << "addNode for DynamicList called" << std::endl;
+		return *this;
+	}
+	virtual void print() { std::cout << "Printing DynamicList" << std::endl; }
 };
 
 // olyan mint egy FifoList, de az uj elemeket mindig az
