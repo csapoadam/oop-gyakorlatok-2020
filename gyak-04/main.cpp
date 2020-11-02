@@ -5,26 +5,43 @@
 #include "LinkedList.h"
 
 void f() {
-    LifoList myLinkedList; // meg jo h kiirattuk es ellenoriztuk h lefut-e a destruktor...
-    myLinkedList.addNode(5).addNode(10).addNode(12);
-    myLinkedList.print();
+    LifoList myLifoList; // meg jo h kiirattuk es ellenoriztuk h lefut-e a destruktor...
+    myLifoList.addNode(5).addNode(10).addNode(12);
+    myLifoList.print();
 
-    LifoList myLinkedList2;
-    myLinkedList2.addNode(15).addNode(16);
-    myLinkedList2.print();
+    LifoList myLifoList2;
+    myLifoList2.addNode(15).addNode(16);
+    myLifoList2.print();
 
-    myLinkedList2 = myLinkedList;
-    myLinkedList2.addNode(17);
+    myLifoList2 = myLifoList;
+    myLifoList2.addNode(17);
     std::cout << "A ket lancolt lifo lista:" << std::endl;
-    myLinkedList.print();
-    myLinkedList2.print();
+    myLifoList.print();
+    myLifoList2.print();
+}
+
+void g() {
+
+    FifoList myFifoList; // meg jo h kiirattuk es ellenoriztuk h lefut-e a destruktor...
+    myFifoList.addNode(5).addNode(10).addNode(12);
+    myFifoList.print();
+
+    FifoList myFifoList2;
+    myFifoList2.addNode(15).addNode(16);
+    myFifoList2.print();
+
+    myFifoList2 = myFifoList;
+    myFifoList2.addNode(17);
+    std::cout << "A ket lancolt fifo lista:" << std::endl;
+    myFifoList.print();
+    myFifoList2.print();
 }
 
 int main()
 {
     char c;
     for (int i = 0; i < 10000; i++) {
-        f();
+        g();
         std::cin >> c;
     }
 }

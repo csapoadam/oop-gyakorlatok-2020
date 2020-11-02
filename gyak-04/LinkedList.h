@@ -1,5 +1,6 @@
 #pragma once
 
+
 class Node {
 	int value;
 	Node* next;
@@ -10,7 +11,7 @@ public:
 	void setNext(Node* n) { next = n; }
 };
 
-// olyan mint egy LinkedList, de az uj elemeket mindig az
+// olyan mint egy FifoList, de az uj elemeket mindig az
 // elejere szurjuk be... ezert pl. amikor printelunk, forditott
 // sorrendben olvassuk ki az ertekeket (mint a hozzaadas sorrendje)
 // LIFO = Last in, first out
@@ -27,15 +28,15 @@ public:
 };
 
 // klasszikus Linked List
-class LinkedList {
+class FifoList {
 	Node* root;
 	Node* getLastNode();
 public:
-	LinkedList() : root(nullptr) {}
-	LinkedList(const LinkedList&);
-	LinkedList& operator=(const LinkedList&);
-	~LinkedList();
-	LinkedList& addNode(int);
+	FifoList() : root(nullptr) {}
+	FifoList(const FifoList&);
+	FifoList& operator=(const FifoList&);
+	~FifoList();
+	FifoList& addNode(int);
 	void deleteItem(int n); // deletes nth element if it exists!
 	void print();
 };

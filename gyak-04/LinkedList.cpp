@@ -6,7 +6,7 @@ Node::Node(int val) : next{ nullptr }, value(val) {
 
 LifoList::LifoList(const LifoList& llToCopy) {
 	// nem lehet 100%-ban u.az a copy constructor, mint
-	// a LinkedList eseteben, mert addNode itt a lista
+	// a FifoList eseteben, mert addNode itt a lista
 	// elejere pakolja a kiolvasott elemeket
 	// -> forditott sorrendet kapnank
 	if (llToCopy.root == nullptr) {
@@ -58,7 +58,8 @@ LifoList& LifoList::addNode(int value) {
 	if (root == nullptr) {// tehat az uj node amit letrehozunk, az lesz maga a root
 		root = new Node(value);// root->next pedig automatikusan nullptr, vagyis tovabbi
 		// teendonk nincs!
-	} else {
+	}
+	else {
 		// a masik esetben letrehozzuk az uj node-ot
 		Node* newNode = new Node(value); // az uj node nextje a korabbi root
 		newNode->setNext(root); // az uj root pedig a most letrehozott node
@@ -97,7 +98,7 @@ bool LifoList::isLastNode(Node* node) {
 }
 
 
-LinkedList::LinkedList(const LinkedList& llToCopy) {
+FifoList::FifoList(const FifoList& llToCopy) {
 	if (llToCopy.root == nullptr) {
 		root = nullptr;
 	}
@@ -111,15 +112,15 @@ LinkedList::LinkedList(const LinkedList& llToCopy) {
 	}
 }
 
-LinkedList& LinkedList::operator=(const LinkedList& llToCopy) {
-	LinkedList deepCopyOfLlToCopy(llToCopy);
+FifoList& FifoList::operator=(const FifoList& llToCopy) {
+	FifoList deepCopyOfLlToCopy(llToCopy);
 	Node* oldroot = this->root;
 	this->root = deepCopyOfLlToCopy.root;
 	deepCopyOfLlToCopy.root = oldroot;
 	return *this;
 }
 
-LinkedList::~LinkedList() {
+FifoList::~FifoList() {
 	std::cout << "Destructor has been called" << std::endl;
 	Node* current = root;
 	if (current != nullptr) {
@@ -131,7 +132,7 @@ LinkedList::~LinkedList() {
 	}
 }
 
-void LinkedList::deleteItem(int n) {
+void FifoList::deleteItem(int n) {
 	if (root != nullptr) {
 		if (n == 1) {
 			// a root-ot kell torolni... es uj rootot beallitani
@@ -170,7 +171,7 @@ void LinkedList::deleteItem(int n) {
 }
 
 
-void LinkedList::print() {
+void FifoList::print() {
 	Node* currentNode = root;
 	if (currentNode != nullptr) {
 		std::cout << "I am a Linked list w/ values: ";
@@ -186,7 +187,7 @@ void LinkedList::print() {
 	}
 }
 
-LinkedList& LinkedList::addNode(int value) {
+FifoList& FifoList::addNode(int value) {
 	// amikor ezt eloszor meghivjuk, root meg nullptr
 	if (root == nullptr) {// tehat az uj node amit letrehozunk, az lesz maga a root
 		root = new Node(value);// root->next pedig automatikusan nullptr, vagyis tovabbi
@@ -202,7 +203,7 @@ LinkedList& LinkedList::addNode(int value) {
 	return *this;
 }
 
-Node* LinkedList::getLastNode() {
+Node* FifoList::getLastNode() {
 	if (root == nullptr) { return nullptr; } // a teljesseg kedveert
 	Node* currentNode = root;
 	while (currentNode->getNext() != nullptr) {
