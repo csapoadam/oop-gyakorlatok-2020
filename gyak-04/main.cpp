@@ -19,14 +19,14 @@ void printDynamicLists(std::vector<DynamicList*> dlvec) {
 }
 
 void f() {
-    LifoList myLifoList; // meg jo h kiirattuk es ellenoriztuk h lefut-e a destruktor...
+    LifoList myLifoList("LifoList1"); // meg jo h kiirattuk es ellenoriztuk h lefut-e a destruktor...
     addNodesThenPrint(&myLifoList, std::vector<int>{5, 10, 12});
 
-    LifoList myLifoList2;
+    LifoList myLifoList2("LifoList2");
     addNodesThenPrint(&myLifoList2, std::vector<int>{15, 16});
 
     myLifoList2 = myLifoList;
-    LifoList myLifoList3(myLifoList);
+    LifoList myLifoList3(myLifoList, "LifoList3");
 
     myLifoList2.addNode(17);
     myLifoList3.addNode(18);
@@ -37,14 +37,14 @@ void f() {
 
 void g() {
 
-    FifoList myFifoList; // meg jo h kiirattuk es ellenoriztuk h lefut-e a destruktor...
+    FifoList myFifoList("FifoList1"); // meg jo h kiirattuk es ellenoriztuk h lefut-e a destruktor...
     addNodesThenPrint(&myFifoList, std::vector<int>{5, 10, 12});
 
-    FifoList myFifoList2;
+    FifoList myFifoList2("FifoList2");
     addNodesThenPrint(&myFifoList2, std::vector<int>{15, 16});
 
     myFifoList2 = myFifoList;
-    FifoList myFifoList3(myFifoList);
+    FifoList myFifoList3(myFifoList, "FifoList3");
 
     myFifoList2.addNode(17);
     myFifoList3.addNode(18);

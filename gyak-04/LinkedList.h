@@ -15,9 +15,10 @@ public:
 class DynamicList {
 protected:
 	Node* root;
+	std::string name;
 public:
-	DynamicList() : root{nullptr} {}
-	DynamicList(const DynamicList&);
+	DynamicList(const std::string& name) : root{ nullptr }, name{name} {}
+	DynamicList(const DynamicList&, const std::string& name);
 	// delete kikenyszeriti, hogy a gyermek vagy megvalositja,
 	// vagy a gyermek nem masolhato =-jellel:
 	DynamicList& operator=(const DynamicList&) = delete;
@@ -36,8 +37,8 @@ public:
 class LifoList : public DynamicList {
 	bool isLastNode(Node*);
 public:
-	LifoList() {}
-	LifoList(const LifoList& other) : DynamicList(other) {
+	LifoList(const std::string& name) : DynamicList(name)  {}
+	LifoList(const LifoList& other, const std::string& name) : DynamicList(other, name) {
 		// ha LifoListnek barmilyen okbol sajat copy constr-ra lenne szuksege
 		// akkor ugyelnunk kell ra, hogy az inicializalo listaban meghivjuk
 		// a szulo copy construktorat is!
@@ -54,6 +55,8 @@ public:
 class FifoList : public DynamicList {
 	Node* getLastNode();
 public:
+	FifoList(const std::string& name) : DynamicList(name) {}
+	FifoList(const FifoList& other, const std::string& name) : DynamicList(other, name) {}
 	FifoList& addNode(int);
 	// itt nincs copy construktor, tehat automatikusan a szuloe hivodik meg!
 	// FifoList mynewFList(myAlreadyExistingFifoList); // azt jelenti, hogy egy DynamicListet is letrehozok vegso soron
