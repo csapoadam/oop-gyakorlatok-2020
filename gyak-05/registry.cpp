@@ -26,6 +26,11 @@ void ValasztasiJegyzek::addVoter(Voter* v) {
 		// torolni is kell ezt a mem.teruletet, mert a destruktor nem fogja...
 		delete v;
 	}
+	else {
+		hasVotedInElections.insert({
+			v->getId(), std::map<Election*, bool>()
+		});
+	}
 }
 
 void ValasztasiJegyzek::printVoters() {
@@ -35,12 +40,30 @@ void ValasztasiJegyzek::printVoters() {
 	// vagy pedig igy:
 	//for (std::pair<int, Voter*> keyValPair : registry) {
 	for (auto keyValPair : registry) {
+		int voterId = keyValPair.first;
 		keyValPair.second->print();
+		auto hasVotedInfo = hasVotedInElections[voterId];
+		for (auto electionsVotes : hasVotedInfo) {
+			if (electionsVotes.second) {
+				std::cout << "  ... has voted in ";
+				std::cout << electionsVotes.first->getName();
+				std::cout << std::endl;
+			}
+		}
 	}
 }
 
 ValasztasiJegyzek::~ValasztasiJegyzek() {
 	for (auto keyValPair : registry) {
 		delete keyValPair.second;
+	}
+}
+
+void ValasztasiJegyzek::initializeElection(Election& e) {
+	for (auto registryIdsAndVoters : registry) {
+		int voterId = registryIdsAndVoters.first;
+		hasVotedInElections[voterId].insert(
+			{&e, true} // false kellene, de a teszt kedveert legyen true
+		);
 	}
 }
