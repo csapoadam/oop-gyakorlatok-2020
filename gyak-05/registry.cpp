@@ -63,7 +63,30 @@ void ValasztasiJegyzek::initializeElection(Election& e) {
 	for (auto registryIdsAndVoters : registry) {
 		int voterId = registryIdsAndVoters.first;
 		hasVotedInElections[voterId].insert(
-			{&e, true} // false kellene, de a teszt kedveert legyen true
+			{&e, false} // false kellene, de a teszt kedveert legyen true
 		);
+	}
+}
+
+void ValasztasiJegyzek::vote(int voterid, Election& e, int candidate) {
+	// letezik-e ilyen voter id?
+	if (registry.find(voterid) != registry.end()) {
+		// igen, letezik...
+		// akkor viszont a hasVotedInElections-ben is lesz ilyen kulcs
+		// mivel az addVoter() errol gondoskodik!
+
+		// na es... szavazhat-e ez a szavazo?
+		auto electionPointersToHasVoted =
+			(*hasVotedInElections.find(voterid)).second;
+		if (electionPointersToHasVoted[&e]) {
+			std::cout << "voter w/ id " << voterid << " has already voted in election " << e.getName() << std::endl;
+		}
+		else {
+			std::cout << "voter w/ id " << voterid << " has voted for candidate " << candidate << std::endl;
+			hasVotedInElections[voterid][&e] = true;
+		}
+	}
+	else {
+		std::cout << "Voter w/ id " << voterid << " does not exist, so cannot vote" << std::endl;
 	}
 }

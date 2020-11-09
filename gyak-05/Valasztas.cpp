@@ -11,16 +11,17 @@ void f() {
     vj.addVoter(new Voter("Aaron Rosenfeldt", "Syracuse", 32, 444512));
     vj.addVoter(new Voter("Sarah Smith", "Buffalo", 24, 471832));
     vj.addVoter(new Voter("Carla Boyce", "Rochester", 22, 471832));
-    //vj.printVoters();
+    vj.printVoters();
 
     Election election2020("Valasztas-2020", 3); // jeloltek szama
     vj.initializeElection(election2020);
 
-    vj.printVoters();
-
     // ezutan valami ilyesmi lesz:
-    //psz->vote(&election2020, 1); // szavazott az 1. jeloltre
-    //ssm->vote(&election2020, 2); // szavazott a 2. jeloltre
+    vj.vote(471832, election2020, 1); // adott id-ju szavazo adott valasztason adott jeloltre szavaz
+    vj.vote(999999, election2020, 2); // ilyen id-ju szavazo nincs!!
+    vj.vote(471832, election2020, 1); // 2x nem lehet szavazni!!
+
+    //election2020.printResults();
 }
 
 int main()

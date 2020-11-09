@@ -2,6 +2,9 @@
 
 #include <string>
 #include <map>
+#include <list>
+
+#include "election.h"
 
 class Voter {
 	std::string name;
@@ -17,8 +20,11 @@ public:
 
 class ValasztasiJegyzek {
 	std::map<int, Voter*> registry;
+	std::map<int, std::map<Election*, bool>> hasVotedInElections;
 public:
 	~ValasztasiJegyzek();
 	void addVoter(Voter*);
 	void printVoters();
+	void initializeElection(Election&);
+	void vote(int voterid, Election& e, int candidate);
 };
