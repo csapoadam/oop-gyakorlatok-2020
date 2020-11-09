@@ -22,6 +22,9 @@ void ValasztasiJegyzek::addVoter(Voter* v) {
 		std::cout << "    > because voter by name ";
 		std::cout << (*successPair.first).second->getName();
 		std::cout << " has the same id!" << std::endl;
+
+		// torolni is kell ezt a mem.teruletet, mert a destruktor nem fogja...
+		delete v;
 	}
 }
 
@@ -33,5 +36,11 @@ void ValasztasiJegyzek::printVoters() {
 	//for (std::pair<int, Voter*> keyValPair : registry) {
 	for (auto keyValPair : registry) {
 		keyValPair.second->print();
+	}
+}
+
+ValasztasiJegyzek::~ValasztasiJegyzek() {
+	for (auto keyValPair : registry) {
+		delete keyValPair.second;
 	}
 }

@@ -18,6 +18,7 @@ public:
 class ValasztasiJegyzek {
 	std::map<int, Voter*> registry;
 public:
+	~ValasztasiJegyzek();
 	void addVoter(Voter*);
 	void printVoters();
 };
