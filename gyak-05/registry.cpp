@@ -1,5 +1,5 @@
-#include "registry.h"
 #include <iostream>
+#include "registry.h"
 
 Voter::Voter(const std::string& nm,
 	const std::string& city, int age, int id) :
@@ -84,6 +84,7 @@ void ValasztasiJegyzek::vote(int voterid, Election& e, int candidate) {
 		else {
 			std::cout << "voter w/ id " << voterid << " has voted for candidate " << candidate << std::endl;
 			hasVotedInElections[voterid][&e] = true;
+			e.addVoteForCandidate(candidate);
 		}
 	}
 	else {

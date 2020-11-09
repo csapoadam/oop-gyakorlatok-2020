@@ -20,8 +20,10 @@ void f() {
     vj.vote(471832, election2020, 1); // adott id-ju szavazo adott valasztason adott jeloltre szavaz
     vj.vote(999999, election2020, 2); // ilyen id-ju szavazo nincs!!
     vj.vote(471832, election2020, 1); // 2x nem lehet szavazni!!
+    vj.vote(444512, election2020, 2);
+    vj.vote(103410, election2020, 2);
 
-    //election2020.printResults();
+    election2020.printResults();
 }
 
 int main()
